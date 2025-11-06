@@ -1,0 +1,335 @@
+:root {
+  --fondo: #e86490;
+  --texto:  #000000;
+  --acento: #ffd359;
+}
+h1 {
+    color: rgb(38, 38, 38);
+    text-shadow: 0 1px 6px rgba(0,0,0,0.2);
+    text-align: center;
+    font-family:Montserrat ;
+}
+
+body {
+  margin: 0;
+  font-family: "Momo Trust Display";
+  background: var(--fondo);
+  color: var(--texto);
+  position: relative;
+  z-index: 15;
+  background-image: url("fond.png"); /* ← escribe aquí el nombre exacto */
+  background-size: cover;      /* La imagen cubre toda la pantalla */
+  background-position: center; /* Centrada */
+  background-repeat: no-repeat;/* No se repite */
+  background-attachment: fixed;
+}
+
+/* NAV */
+.top-nav {
+  background: #fff2e3;
+  padding: 10px 25px;
+  border-radius: 30px; /* Bordes redondeados */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  position: sticky;
+  margin-top: 50 px;
+  top: 50px;            /* Se separa del top */
+  width: 700px;   /* Se ajusta al contenido */
+  margin: 0 auto;       /* CENTRA la barra */
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  z-index: 20;
+}
+
+/* Lista */
+.top-nav ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Elementos */
+.top-nav li {
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 10px;
+  transition: 0.25s;
+}
+
+/* Hover */
+.top-nav li:hover {
+  background: var(--acento);
+}
+
+/* INICIO CENTRADO */
+#seccion-inicio {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: calc(100vh - 60px);
+  position: relative;
+  z-index: 2;
+  color: white;
+  padding-top: px;
+}
+
+/* CARRUSEL */
+.slider-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  width: 100%;
+  height: calc(100vh - 60px);
+}
+.slide {
+  padding: 40px;
+  scroll-snap-align: start;
+  width: 100vw;        /* Cada sección ocupa solo una pantalla */
+  flex-shrink: 0;      /* Evita que se comprima */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra el grid */
+  justify-content: flex-start;
+  box-sizing: border-box;
+
+}
+
+/* GRID PRODUCTOS */
+.grid-productos 
+{  
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+}
+
+.producto {
+  background: rgba(186, 74, 255, 0.436);
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 20px;
+  box-sizing: border-box;
+  font-family:Montserrat ;
+  font-style: bold;
+  width: 80%;          /* ✅ Cada tarjeta ocupa solo su columna */
+  max-width: none;      /* ✅ Evita que se haga gigante */
+  margin: 0;            
+}
+
+.producto img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+.producto:hover {
+  transform: scale(1.03);
+}
+
+
+.btn-agregar {
+  background: var(--acento);
+  border: none;
+  padding: 8px 14px;
+  margin-top: 8px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.btn-agregar:hover {
+  background: #e3e3e3;
+  transform: scale(1.05);
+}
+
+/* TOOLTIP ROSADO */
+.producto:hover::after {
+  content: attr(data-descripcion);
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--acento);
+  color: white;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  max-width: 180px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  animation: fadeIn 0.18s ease;
+  z-index: 9999;
+}
+.producto:hover::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent var(--acento) transparent;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, 5px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* PANEL CARRITO */
+.carrito-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 260px;
+  height: 100vh;
+  background: white;
+  border-left: 2px solid var(--acento);
+  padding: 20px;
+  transform: translateX(100%);
+  transition: transform 0.35s ease;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  border-radius: 34px;
+}
+.carrito-panel.visible {
+  transform: translateX(0);
+}
+
+
+
+#seccion-inicio * {
+  position: relative;
+  z-index: 10;
+}
+
+#carrito-lista li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.btn-eliminar {
+  background: transparent;
+  border: none;
+  color: #d64545;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.2s;
+}
+
+.btn-eliminar:hover {
+  transform: scale(1.3);
+}
+
+/* PANTALLA DE BIENVENIDA */
+.pantalla-bienvenida {
+  position: fixed;
+  inset: 0;
+  background-image: url("intro.png"); /* ← TU IMAGEN AQUÍ */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  backdrop-filter: blur(2px);
+  z-index: 99999;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+/* Overlay suave rosado encima de la imagen */
+.pantalla-bienvenida::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(232, 198, 216, 0.35); /* rosado pastel translúcido */
+  backdrop-filter: blur(1px);
+  z-index: 0;
+}
+
+.bienvenida-contenido {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0);
+  padding: 40px 60px;
+  border-radius: 20px;
+  text-align: center;
+  backdrop-filter: blur(6px);
+
+}
+
+.bienvenida-contenido h1 {
+  margin-bottom: 10px;
+  font-size: 2rem;
+}
+
+.bienvenida-contenido p {
+  margin-bottom: 20px;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+#btn-continuar {
+  background: var(--acento);
+  border: none;
+  padding: 12px 26px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+#btn-continuar:hover {
+  transform: scale(1.05);
+  background: #d8b0c7;
+}
+
+/* Ocultar suavemente al continuar */
+.pantalla-bienvenida.oculto {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.cerrar-carrito {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #555;
+  transition: 0.2s;
+}
+
+.cerrar-carrito:hover {
+  transform: scale(1.2);
+  color: #b44f6b; /* tono suave */
+}
+
+.momo-trust-display-regular {
+  font-family: "Momo Trust Display", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.momo-trust-display-regular {
+  font-family: "Momo Trust Display", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
